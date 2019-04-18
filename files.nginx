@@ -1,0 +1,19 @@
+upstream files.adrianistan.eu {
+	server 192.168.0.158:2345;
+}
+
+server {
+	listen 80;
+	listen 443 ssl http2;
+	server_name files.adrianistan.eu;
+
+	ssl_certificate /etc/letsencrypt/live/files.adrianistan.eu/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/files.adrianistan.eu/privkey.pem;
+
+	location / {
+		proxy_set_header Host $http_host;
+
+		proxy_pass http://files.adrianistan.eu;
+		proxy_redirect off;
+	}
+}
