@@ -4,9 +4,10 @@ Requires=network.target
 After=network.target
 
 [Service]
-Type=simple
+User=pi
+Type=forking
 WorkingDirectory=/home/pi/files-prolog
-ExecStart=/usr/local/bin/swipl /home/pi/files-prolog/app.pl --no-fork
+ExecStart=/usr/local/bin/swipl app.pl --port=2345 --user=pi
 Restart=always
 RestartSec=10
 
