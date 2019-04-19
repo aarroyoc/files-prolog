@@ -5,6 +5,7 @@
 :- use_module(library(http/http_client)).
 :- use_module(library(http/http_multipart_plugin)).
 :- use_module(library(http/http_authenticate)).
+:- use_module(library(http/http_unix_daemon)).
 
 server(Port) :-
     http_server(http_dispatch, [port(Port),workers(1)]).
@@ -83,6 +84,7 @@ save_file(In, file(FileName, FileOut), Options) :-
         close(Stream)).
 
 run :-
-    server(2345).
+	%server(2345),
+    http_daemon([port(2345)]).
 
 :- run.
