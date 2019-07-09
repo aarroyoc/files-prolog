@@ -1,13 +1,12 @@
 [Unit]
 Description=Files
-Requires=network.target
-After=network.target
+Requires=docker.service
+After=docker.service
 
 [Service]
-User=pi
-Type=forking
 WorkingDirectory=/home/pi/files-prolog
-ExecStart=/usr/local/bin/swipl app.pl --port=2345 --user=pi
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose down
 Restart=always
 RestartSec=10
 
