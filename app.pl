@@ -85,6 +85,6 @@ save_file(In, file(FileName, FileOut), Options) :-
 
 run :-
 	%server(2345),
-    http_daemon([port(2345)]).
+    http_daemon([port(2345),fork(false)]).
 
 :- run.
