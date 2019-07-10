@@ -6,18 +6,21 @@
 :- use_module(library(http/http_multipart_plugin)).
 :- use_module(library(http/http_authenticate)).
 :- use_module(library(http/http_unix_daemon)).
+:- use_module(library(http/http_files)).
 
-server(Port) :-
-    http_server(http_dispatch, [port(Port),workers(1)]).
+%server(Port) :-
+%    http_server(http_dispatch, [port(Port),workers(1)]).
 
 :- http_handler(/,index,[method(get)]).
 :- http_handler(root(upload),upload,[method(post)]).
 :- http_handler(root(Path),static(Path),[method(get)]).
 
+%:- http_handler(root(.), http_reply_from_files('.', []), [prefix]).
+
 auth(Request) :-
     Realm = 'Files Adrianistan',
     (
-        string_codes("123456789",Password),
+        string_codes("SanFdo.2509",Password),
         member(authorization(Header),Request),http_authorization_data(Header,basic(aarroyoc,Password)) -> true
         ;
         throw(http_reply(authorise(basic, Realm)))

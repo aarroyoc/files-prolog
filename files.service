@@ -7,8 +7,10 @@ After=docker.service
 WorkingDirectory=/home/pi/files-prolog
 ExecStart=/usr/local/bin/docker-compose up
 ExecStop=/usr/local/bin/docker-compose down
-Restart=always
-RestartSec=10
+TimeoutStartSec=0
+Restart=on-failure
+StartLimitIntervalSec=60
+StartLimitBurst=3
 
 [Install]
 WantedBy=multi-user.target
