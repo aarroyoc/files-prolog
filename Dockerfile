@@ -6,6 +6,5 @@ COPY app.pl ./
 
 RUN useradd prolog
 
-#CMD ["su", "-", "prolog", "-c", "swipl /opt/files-prolog/app.pl --port=2345 --no-fork"]
 USER prolog
 CMD ["swipl","app.pl"]

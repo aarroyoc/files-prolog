@@ -7,6 +7,7 @@
 :- use_module(library(http/http_authenticate)).
 :- use_module(library(http/http_unix_daemon)).
 :- use_module(library(http/http_files)).
+:- use_module('config.pl').
 
 %server(Port) :-
 %    http_server(http_dispatch, [port(Port),workers(1)]).
@@ -20,8 +21,9 @@
 auth(Request) :-
     Realm = 'Files Adrianistan',
     (
-        string_codes("SanFdo.2509",Password),
-        member(authorization(Header),Request),http_authorization_data(Header,basic(aarroyoc,Password)) -> true
+	config(Username,StrPassword),
+        string_codes(StrPassword,Password),
+        member(authorization(Header),Request),http_authorization_data(Header,basic(Username,Password)) -> true
         ;
         throw(http_reply(authorise(basic, Realm)))
     ).

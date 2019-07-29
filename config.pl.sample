@@ -1,0 +1,3 @@
+:- module(config,[config/2]).
+
+config(user,"123456").
