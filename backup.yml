@@ -1,0 +1,23 @@
+- hosts: all
+  remote_user: pi
+  become_method: sudo
+  name: "Backup Files"
+  tasks:
+    - name: Backup files
+      command: tar cvf backup-files.tar files.adrianistan.eu/data
+      args:
+        chdir: /home/pi
+
+    - name: Download files backup
+      fetch:
+        src: /home/pi/backup-files.tar
+        dest: backups/files.tar
+        flat: yes
+
+    - name: Compress files Backup
+      local_action: archive
+      args:
+        path: 
+        - backups/files.tar
+        dest: backups/files-{{ ansible_date_time.date }}.tar.xz
+        format: xz
