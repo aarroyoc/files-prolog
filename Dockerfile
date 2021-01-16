@@ -1,4 +1,4 @@
-FROM arm32v7/swipl:8.2.0
+FROM arm32v7/swipl:8.2.3
 
 WORKDIR /opt/files-prolog
 
